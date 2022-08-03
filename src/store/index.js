@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const counterReducer = (state = initialState, action) => {
-    if (action.type = 'inc') {
+    if (action.type === 'inc') {
         return {
             ...state,
             counter: state.counter + 1
@@ -14,6 +14,12 @@ const counterReducer = (state = initialState, action) => {
     }
 
     if (action.type === 'dec') {
+
+
+        if (state.counter <= 0) {
+            return state
+        }
+
         return {
             ...state,
             counter: state.counter - 1

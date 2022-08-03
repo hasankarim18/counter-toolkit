@@ -1,7 +1,12 @@
 import classes from './Counter.module.css';
+import { useSelector } from 'react-redux';
+// connect for class base component
 
 const Counter = () => {
-  const toggleCounterHandler = () => {};
+
+
+
+  const toggleCounterHandler = () => { };
 
   return (
     <main className={classes.counter}>

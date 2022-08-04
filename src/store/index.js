@@ -15,14 +15,23 @@ const counterReducer = (state = initialState, action) => {
 
     if (action.type === 'dec') {
 
-
-        if (state.counter <= 0) {
-            return state
-        }
-
         return {
             ...state,
             counter: state.counter - 1
+        }
+    }
+
+    if (action.type === 'incbyfive') {
+        return {
+            ...state,
+            counter: state.counter + action.payload
+        }
+    }
+
+    if (action.type === "decbyfive") {
+        return {
+            ...state,
+            counter: state.counter - action.payload
         }
     }
 

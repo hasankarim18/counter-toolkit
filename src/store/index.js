@@ -1,5 +1,5 @@
-import redux, { createStore } from 'redux'
-import { createSlice } from '@reduxjs/toolkit'
+
+import { createSlice, configureStore } from '@reduxjs/toolkit'
 
 
 const initialState = {
@@ -7,51 +7,39 @@ const initialState = {
     showCounter: true
 }
 
-
-
-const counterReducer = (state = initialState, action) => {
-    if (action.type === 'inc') {
-        return {
-            ...state,
-            counter: state.counter + 1,
-
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState: initialState,
+    reducers: {
+        increment(state) {
+            state.counter++;
+        },
+        decrement(state) {
+            state.counter--
+        },
+        incbyfive(state, action) {
+            state.counter = state.counter + action.payload
+        },
+        decbyfive() {
+            state.counter = state.counter - action.payload
+        },
+        togggleCounter() {
+            state.showCounter = !state.showCounter
         }
     }
+})
 
-    if (action.type === 'dec') {
+const store = configureStore({
+    reducer: counterSlice.reducer
+})
 
-        return {
-            ...state,
-            counter: state.counter - 1,
-        }
-    }
 
-    if (action.type === 'incbyfive') {
-        return {
-            ...state,
-            counter: state.counter + action.payload,
-        }
-    }
-
-    if (action.type === "decbyfive") {
-        return {
-            ...state,
-            counter: state.counter - action.payload,
-        }
-    }
-
-    if (action.type === 'toggle') {
-        return {
-            ...state,
-            showCounter: !state.showCounter,
-        }
-    }
-
-    return state
-
-}
-
-const store = createStore(counterReducer)
+// alternative way
+// const store = configureStore({
+//     reducer: {
+//         counter: counterSlice.reducer
+//     }
+// })
 
 export default store
 
